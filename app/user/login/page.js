@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
 
   const [email, setEmail] = useState('');
@@ -148,4 +148,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

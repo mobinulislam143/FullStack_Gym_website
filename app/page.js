@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-const page = () => {
+const Page = () => {
   return (
     <div>
       <div className="min-h-screen flex flex-col items-center justify-between bg-black relative overflow-hidden">
@@ -152,4 +152,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
