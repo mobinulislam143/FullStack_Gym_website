@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 
-const Page = ({children}) => {
+const Page = () => {
   
 
   return (
     <div className="flex">
-     {children}
+      <p>This is Mahi</p>
+  
     </div>
   );
 };

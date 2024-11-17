@@ -31,13 +31,13 @@ const Page = ({children}) => {
         <h2 className="text-lg font-bold mb-6">Sidebar</h2>
         <ul>
           <li className="mb-4">
-            <Link to="/dashboard" className="hover:text-gray-400">Dashboard</Link>
+            <Link href="/dashboard" className="hover:text-gray-400">Dashboard</Link>
           </li>
           <li className="mb-4">
-            <Link to="/dashboard/admin/trainer" className="hover:text-gray-400">Manage Trainers</Link>
+            <Link href="/dashboard/admin/trainer" className="hover:text-gray-400">Manage Trainers</Link>
           </li>
           <li className="mb-4">
-            <Link to="/dashboard/admin/class" className="hover:text-gray-400">Class Scheduling</Link>
+            <Link href="/dashboard/admin/class" className="hover:text-gray-400">Class Scheduling</Link>
           </li>
         </ul>
       </div>

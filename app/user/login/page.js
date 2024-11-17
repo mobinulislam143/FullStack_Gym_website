@@ -3,36 +3,44 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import Navbar from '@/app/component/Navbar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { LoginRequest } from '@/app/component/ApiRequest';
 
 const Page = () => {
   const router = useRouter();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }))
+  }
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const { email, password } = formData;
 
     try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      LoginRequest(email, password).then((result) => {
+        if (result === true) {
+          toast.success('Registration successful!');
+          router.push('/');
+    
+        } else {
+            toast.error("Something Went Wrong!!!");
+        }
+    });
+     
 
-      if (!res.ok) {
-        const { message } = await res.json();
-        setError(message || 'Login failed');
-        return;
-      }
 
-      const { token } = await res.json();
-      localStorage.setItem('token', token);
-      router.push('/admin');
     } catch (err) {
       console.error('Login error:', err);
       setError('Something went wrong. Please try again.');
@@ -41,7 +49,7 @@ const Page = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 relative overflow-hidden">
-   
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.5 }}
@@ -94,8 +102,9 @@ const Page = () => {
             <input
               type="email"
               id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
               className="w-full px-4 py-2 border border-amber-500 bg-black text-yellow-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
               placeholder="Enter your email"
               required
@@ -115,8 +124,9 @@ const Page = () => {
             <input
               type="password"
               id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
               className="w-full px-4 py-2 border border-amber-500 bg-black text-yellow-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
               placeholder="Enter your password"
               required
@@ -145,6 +155,7 @@ const Page = () => {
           </a>
         </motion.p>
       </motion.div>
+      <ToastContainer position='bottom-center' />
     </div>
   );
 };

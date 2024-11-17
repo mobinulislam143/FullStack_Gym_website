@@ -1,13 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect }  from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import ClassShedule from './ClassShedule';
 import Navbar from './component/Navbar';
 import Footer from './component/Footer';
+import { test } from './component/ApiRequest';
 
 const Page = () => {
+
+  useEffect(() => {
+   ( async()=>{
+    let fetchData = await test()
+    console.log(fetchData)
+   })()
+  },[])
   return (
     <div>
       <div className="min-h-screen flex flex-col items-center justify-between bg-black relative overflow-hidden">

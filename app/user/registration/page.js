@@ -3,52 +3,68 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { RegistrationRequest } from '@/app/component/ApiRequest';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Page = () => {
   const router = useRouter();
-
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    confirmPassword: '',
     full_name: '',
     role: 'trainee', // Default role
   });
 
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const { email, password, confirmPassword, full_name, role } = formData;
+    console.log('Data being sent to the server:', formData);
+
+    // Set loading state
+    setLoading(true);
+    setError(null); // Clear previous errors
+
     try {
-      const res = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await RegistrationRequest(email, password, full_name, confirmPassword, role);
 
       if (!res.ok) {
-        const { message } = await res.json();
-        setError(message || 'Registration failed');
+        const message = res.error?.message || 'Registration failed';
+        toast.error("Email already exist")
+        setError(message);
+        setLoading(false); // Stop the loader
         return;
       }
 
-      setSuccess('Registration successful! Redirecting to login...');
-      setTimeout(() => {
-        router.push('/user/login');
-      }, 2000);
+      // Success: Show success toast and reset form
+      toast.success('Registration successful!');
+      setFormData({ email: '', password: '', confirmPassword: '', full_name: '', role: '' });
+
+      // Redirect to home page
+      
+      router.push('/');
     } catch (err) {
       console.error('Registration error:', err);
       setError('Something went wrong. Please try again.');
+    } finally {
+      // Stop the loader regardless of success or failure
+      setLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden">
@@ -93,15 +109,7 @@ const Page = () => {
             <p>{error}</p>
           </motion.div>
         )}
-        {success && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-4 text-green-500 text-center"
-          >
-            <p>{success}</p>
-          </motion.div>
-        )}
+      
         <form onSubmit={handleSubmit} className="space-y-6">
           <motion.div
             initial={{ x: -100, opacity: 0 }}
@@ -122,6 +130,7 @@ const Page = () => {
               required
             />
           </motion.div>
+       
           <motion.div
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -141,12 +150,13 @@ const Page = () => {
               required
             />
           </motion.div>
+
           <motion.div
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <label htmlFor="password" className="block font-medium text-amber-500">
+            <label htmlFor="password" className="block font-medium text-amber-500 mt-4">
               Password
             </label>
             <input
@@ -160,6 +170,32 @@ const Page = () => {
               required
             />
           </motion.div>
+
+          <motion.div
+            initial={{ x: 100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <label
+              htmlFor="confirmPassword"
+              className="block font-medium text-amber-500 mt-4"
+            >
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword" // Ensure this matches your state
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border border-amber-500 bg-black text-yellow-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+              placeholder="Confirm password"
+              required
+            />
+          </motion.div>
+
+
+
           <motion.div
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -202,6 +238,8 @@ const Page = () => {
           </a>
         </motion.p>
       </motion.div>
+      <ToastContainer position='bottom-center' />
+
     </div>
   );
 };
