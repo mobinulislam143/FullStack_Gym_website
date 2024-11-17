@@ -3,11 +3,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import ClassShedule from './ClassShedule';
+import Navbar from './component/Navbar';
 
 const Page = () => {
   return (
     <div>
       <div className="min-h-screen flex flex-col items-center justify-between bg-black relative overflow-hidden">
+        {/* Background Image with Opacity */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: 'url("https://res.cloudinary.com/dmpsrcunj/image/upload/v1731786697/Pngtree_3d_powerful_body_builder_gym_15851228_l23mj3.png")',
+            opacity: 0.2, /* Adjust the opacity as needed */
+          }}
+        ></div>
+
         {/* Background Animation */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -31,7 +42,7 @@ const Page = () => {
         ></motion.div>
 
         {/* Navigation Bar */}
-        <nav className="w-full px-6 py-4 flex items-center justify-between z-10">
+        {/* <nav className="w-full px-6 py-4 flex items-center justify-between z-10">
           <h1 className="text-2xl font-bold text-amber-500">
             GymPulse<span className="text-yellow-300">.io</span>
           </h1>
@@ -48,9 +59,15 @@ const Page = () => {
             >
               Register
             </Link>
+            <Link
+              href="/user/trainer"
+              className="btn bg-white px-4 rounded-md py-2 text-yellow-300 hover:text-amber-500 transition-colors"
+            >
+              Profile
+            </Link>
           </div>
-        </nav>
-
+        </nav> */}
+        <Navbar/>
         {/* Main Content */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -85,22 +102,22 @@ const Page = () => {
         {/* Services Section */}
         <div className="w-full py-16 bg-black text-center text-yellow-300">
           <h3 className="text-3xl font-bold mb-8">Our Services</h3>
-          <div className="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-16">
-            <div className="max-w-xs bg-amber-500 p-6 rounded-xl shadow-lg text-black">
+          <div className="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-16  ">
+            <div className="max-w-xs bg-amber-500 p-6 rounded-xl shadow-lg text-black z-[10]">
               <h4 className="text-2xl font-bold mb-4">Personal Training</h4>
               <p>
                 Work one-on-one with a professional trainer to achieve your fitness
                 goals faster. Tailored training plans and personalized support.
               </p>
             </div>
-            <div className="max-w-xs bg-amber-500 p-6 rounded-xl shadow-lg text-black">
+            <div className="max-w-xs bg-amber-500 p-6 rounded-xl shadow-lg text-black z-[10]">
               <h4 className="text-2xl font-bold mb-4">Group Classes</h4>
               <p>
                 Join our group classes for a fun and motivating workout. Yoga, Zumba,
                 and more—find the class that fits your goals.
               </p>
             </div>
-            <div className="max-w-xs bg-amber-500 p-6 rounded-xl shadow-lg text-black">
+            <div className="max-w-xs bg-amber-500 p-6 rounded-xl shadow-lg text-black z-[10]">
               <h4 className="text-2xl font-bold mb-4">Nutrition Coaching</h4>
               <p>
                 Fuel your workouts with the right nutrition. Our experts provide
@@ -111,10 +128,13 @@ const Page = () => {
         </div>
 
         {/* Testimonials Section */}
-        <div className="w-full py-16 bg-gray-800 text-center text-yellow-300">
+        <div className="w-full py-16 bg-gray-800 text-center text-yellow-300 ">
           <h3 className="text-3xl font-bold mb-8">What Our Clients Say</h3>
           <div className="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-16">
-            <div className="max-w-xs bg-amber-500 p-6 rounded-xl shadow-lg text-black">
+            <div className="max-w-xs bg-amber-500 p-6 rounded-xl shadow-lg text-black z-[10]">
+              <img src="https://res.cloudinary.com/dmpsrcunj/image/upload/v1728848361/elizeu-dias-2EGNqazbAMk-unsplash_xarxcd.jpg"
+                className="w-72 h-48 object-cover rounded-md"
+                alt="img1" />
               <p>
                 "GymPulse has transformed my fitness journey. The personalized
                 training and support have been invaluable!"
@@ -122,7 +142,11 @@ const Page = () => {
               <h5 className="font-bold mt-4">John Doe</h5>
               <p>Fitness Enthusiast</p>
             </div>
-            <div className="max-w-xs bg-amber-500 p-6 rounded-xl shadow-lg text-black">
+
+            <div className="max-w-xs bg-amber-500 p-6 rounded-xl shadow-lg text-black z-[10]">
+              <img src="https://res.cloudinary.com/dmpsrcunj/image/upload/v1728848355/ana-nichita-BI91NrppE38-unsplash_ga3yfb.jpg"
+                className="w-72 h-48 object-cover rounded-md"
+                alt="img3" />
               <p>
                 "The group classes are so much fun! I love the energy and the community
                 feeling here."
@@ -130,7 +154,10 @@ const Page = () => {
               <h5 className="font-bold mt-4">Jane Smith</h5>
               <p>Zumba Lover</p>
             </div>
-            <div className="max-w-xs bg-amber-500 p-6 rounded-xl shadow-lg text-black">
+            <div className="max-w-xs bg-amber-500 p-6 rounded-xl shadow-lg text-black z-[10]">
+              <img src="https://res.cloudinary.com/dmpsrcunj/image/upload/v1728848358/dmitry-vechorko-E9PFbdhZmus-unsplash_laryqy.jpg"
+                className="w-72 h-48 object-cover rounded-md"
+                alt="img3" />
               <p>
                 "With the nutrition coaching, I’ve seen significant improvement in my
                 performance and overall health."
@@ -139,7 +166,14 @@ const Page = () => {
               <p>Nutrition Client</p>
             </div>
           </div>
+
+
+        <div className="z-[10] py-6">
+          <ClassShedule/>
         </div>
+        </div>
+
+
 
         {/* Footer */}
         <footer className="w-full py-6 text-center text-yellow-300 z-10">
@@ -148,6 +182,8 @@ const Page = () => {
           </p>
         </footer>
       </div>
+
+
     </div>
   );
 };
