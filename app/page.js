@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import ClassShedule from './ClassShedule';
 import Navbar from './component/Navbar';
+import Footer from './component/Footer';
 
 const Page = () => {
   return (
@@ -41,34 +42,9 @@ const Page = () => {
           className="absolute bottom-1/3 right-1/3 h-48 w-48 bg-yellow-400 rounded-full blur-2xl opacity-20"
         ></motion.div>
 
-        {/* Navigation Bar */}
-        {/* <nav className="w-full px-6 py-4 flex items-center justify-between z-10">
-          <h1 className="text-2xl font-bold text-amber-500">
-            GymPulse<span className="text-yellow-300">.io</span>
-          </h1>
-          <div className="space-x-4">
-            <Link
-              href="/user/login"
-              className="text-yellow-300 hover:text-amber-500 transition-colors"
-            >
-              Login
-            </Link>
-            <Link
-              href="/user/registration"
-              className="text-yellow-300 hover:text-amber-500 transition-colors"
-            >
-              Register
-            </Link>
-            <Link
-              href="/user/trainer"
-              className="btn bg-white px-4 rounded-md py-2 text-yellow-300 hover:text-amber-500 transition-colors"
-            >
-              Profile
-            </Link>
-          </div>
-        </nav> */}
+       
         <Navbar/>
-        {/* Main Content */}
+       
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -176,11 +152,7 @@ const Page = () => {
 
 
         {/* Footer */}
-        <footer className="w-full py-6 text-center text-yellow-300 z-10">
-          <p className="text-sm">
-            © {new Date().getFullYear()} GymPulse.io. All rights reserved.
-          </p>
-        </footer>
+            <Footer/>
       </div>
 
 

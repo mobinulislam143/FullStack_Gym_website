@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import Navbar from '@/app/component/Navbar';
 
 const Page = () => {
   const router = useRouter();
@@ -40,7 +41,7 @@ const Page = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 relative overflow-hidden">
-      {/* Background Animation */}
+   
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.5 }}
