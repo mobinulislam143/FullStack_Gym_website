@@ -61,13 +61,13 @@ const Page = () => {
           </p>
           <div className="flex space-x-6">
             <Link
-              href="/auth/login"
+              href="/user/login"
               className="bg-amber-500 hover:bg-yellow-400 text-black font-bold py-3 px-6 rounded-md shadow-lg transition-transform transform hover:scale-105"
             >
               Get Started
             </Link>
             <Link
-              href="/auth/register"
+              href="/user/registration"
               className="bg-yellow-400 hover:bg-amber-500 text-black font-bold py-3 px-6 rounded-md shadow-lg transition-transform transform hover:scale-105"
             >
               Join Now
@@ -108,14 +108,14 @@ const Page = () => {
           <h3 className="text-3xl font-bold mb-8">What Our Clients Say</h3>
           <div className="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-16">
             <div className="max-w-xs bg-amber-500 p-6 rounded-xl shadow-lg text-black z-[10]">
-              <img src="https://res.cloudinary.com/dmpsrcunj/image/upload/v1728848361/elizeu-dias-2EGNqazbAMk-unsplash_xarxcd.jpg"
+              <img src="https://res.cloudinary.com/dmpsrcunj/image/upload/v1731827904/sdfd_sfb6p6.jpg"
                 className="w-72 h-48 object-cover rounded-md"
                 alt="img1" />
               <p>
                 "GymPulse has transformed my fitness journey. The personalized
                 training and support have been invaluable!"
               </p>
-              <h5 className="font-bold mt-4">John Doe</h5>
+              <h5 className="font-bold mt-4">Mobinul Islam Mahi</h5>
               <p>Fitness Enthusiast</p>
             </div>
 

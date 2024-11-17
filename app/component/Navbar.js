@@ -15,12 +15,12 @@ const Navbar = (props) => {
             >
               Login
             </Link>
-            <Link
+            {/* <Link
               href="/user/registration"
               className="text-yellow-300 hover:text-amber-500 transition-colors"
             >
               Register
-            </Link>
+            </Link> */}
             <Link
               href="/user/trainer"
               className="btn bg-white hover:bg-gray-400 px-4 rounded-md py-2 text-black hover:text-amber-500 transition-colors"
