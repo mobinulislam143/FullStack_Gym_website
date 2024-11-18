@@ -1,15 +1,13 @@
+'use client'
 import React from "react";
+import { Provider, useSelector } from "react-redux";
+import store from '@/app/redux/store/store'; 
 
 const Page = () => {
-  // Sample user data
-  const userData = {
-    email: "user@example.com",
-    password: "********", // Masked for security
-    full_name: "John Doe",
-    role: "trainer", // or 'trainee'
-  };
+  const UserProfile =  useSelector((state) => state.user.Profile)
 
   return (
+    <Provider store={store}>
     <div className="min-h-screen flex flex-col items-center justify-center bg-black relative overflow-hidden">
       {/* Background Image with Opacity */}
       <div
@@ -31,26 +29,26 @@ const Page = () => {
             <label className="block text-sm font-medium text-gray-700">
               Full Name:
             </label>
-            <p className="text-lg font-semibold text-amber-800">{userData.full_name}</p>
+            <p className="text-lg font-semibold text-amber-800">{UserProfile.full_name}</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Email:
             </label>
-            <p className="text-lg font-semibold text-amber-800">{userData.email}</p>
+            <p className="text-lg font-semibold text-amber-800">{UserProfile.email}</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Password:
             </label>
-            <p className="text-lg font-semibold text-amber-800">{userData.password}</p>
+            <p className="text-lg font-semibold text-amber-800">{UserProfile.password}</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Role:
             </label>
             <p className="text-lg font-semibold text-amber-800">
-              {userData.role.charAt(0).toUpperCase() + userData.role.slice(1)}
+              {UserProfile.role.charAt(0).toUpperCase() + UserProfile.role.slice(1)}
             </p>
           </div>
         </div>
@@ -61,6 +59,8 @@ const Page = () => {
         </div>
       </div>
     </div>
+
+    </Provider>
   );
 };
 

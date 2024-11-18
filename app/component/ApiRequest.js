@@ -1,9 +1,11 @@
 import axios from "axios";
+// import { getProfile } from "../redux/slice/userslice";
+import Cookies from "js-cookie";
 // import store from "../store/store"; // Update the path as needed
 // import { showLoader, hideLoader } from "../slices/uiSlice";
 // import { setUserProfile } from "../slices/userSlice"; // Assuming you have a user slice
 // import { setClasses } from "../slices/classSlice"; // Assuming you have a class slice
-
+import {getProfile} from '@/app/redux/slice/userslice'
 const BaseUrl = "https://gym-backend-zbsu.onrender.com"; // Replace with your actual base URL
 
 
@@ -52,6 +54,21 @@ export async function LoginRequest(email, password) {
   } catch (e) {
     console.log(e.toString());
     store.dispatch(hideLoader());
+  }
+}
+export async function getProfileRequest() {
+  let url = `${BaseUrl}/api/getProfile`;
+  try {
+    const response = await axios.post(url, { headers: {
+        'token': Cookies.get('token')
+    }});
+    if (response.data.status === 'success') {
+        store.dispatch(getProfile(res.data.data)); // Update Redux state with profile data
+      } else {
+        console.error('Unexpected response status:', res.data.status);
+      }
+  } catch (e) {
+    console.log(e.toString());
   }
 }
 

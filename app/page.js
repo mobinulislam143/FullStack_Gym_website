@@ -7,6 +7,8 @@ import ClassShedule from './ClassShedule';
 import Navbar from './component/Navbar';
 import Footer from './component/Footer';
 import { test } from './component/ApiRequest';
+import store from '@/app/redux/store/store'; 
+import { Provider } from 'react-redux';
 
 const Page = () => {
 
@@ -17,7 +19,9 @@ const Page = () => {
    })()
   },[])
   return (
-    <div>
+    <Provider store={store}>
+
+    <div >
       <div className="min-h-screen flex flex-col items-center justify-between bg-black relative overflow-hidden">
         {/* Background Image with Opacity */}
         <div
@@ -165,6 +169,9 @@ const Page = () => {
 
 
     </div>
+
+    </Provider>
+
   );
 };
 
